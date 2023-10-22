@@ -2,11 +2,11 @@
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
 /*    Author:       haoren                                                    */
-/*    Created:      2023/10/5 20:06:12                                        */
+/*    Created:      2023/10/19 20:43:31                                       */
 /*    Description:  V5 project                                                */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-#include"vex.h"
+#include "vex.h"
 
 using namespace vex;
 
@@ -14,20 +14,27 @@ using namespace vex;
 vex::brain       Brain;
 
 // define your global instances of motors and other devices here
+vex::motor motor1(16,true);
+ vex::motor motor2(17,true);
+ vex::motor motor3(18);
+ vex::motor motor4(19);
+ int a,b,c;
+int main()
+{
+vex::controller con1;
+int c=150;
+ while (1)
+ {
+    a=con1.Axis3.position(pct);
+    b=con1.Axis4.position(pct);
+    motor1.spin(fwd,c*((a+b)/100),rpm);
+      motor2.spin(fwd,c*((a+b)/100),rpm);
+        motor3.spin(fwd,c*((a-b)/100),rpm);
+          motor4.spin(fwd,c*((a-b)/100),rpm);
+    
+ }
+ 
 
-
-int main() {
-
-   vex::motor motor1(0);
-vex::motor motor2(9);
-motor1.spin(vex::directionType::fwd,60,vex::velocityUnits::rpm);
-motor2.spin(vex::directionType::rev,12,vex::velocityUnits::rpm);
-this_thread::sleep_for(13334);
-motor1.spin(vex::directionType::fwd,12,vex::velocityUnits::rpm);
-motor2.spin(vex::directionType::rev,60,vex::velocityUnits::rpm);
-this_thread::sleep_for(13334);
-motor1.stop(brake);
-motor2.stop(brake);
+    
 return 0;
-    }
-
+}
